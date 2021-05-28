@@ -10,13 +10,13 @@ statement. For example, with the input
 ```mysql
 CREATE TABLE `user`
 (
-    `id`            INT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT COMMENT 'primary key',
-    `ip_address`    INT                      NOT NULL DEFAULT 0 COMMENT 'ip_address',
-    `nickname`      VARCHAR(128)             NOT NULL DEFAULT '' COMMENT 'user note',
-    `description`   VARCHAR(256)             NOT NULL DEFAULT '' COMMENT 'user description',
-    `creator_email` VARCHAR(64)              NOT NULL DEFAULT '' COMMENT 'creator email',
-    `created_at`    TIMESTAMP                NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'create time',
-    `deleted_at`    TIMESTAMP                NULL     DEFAULT NULL COMMENT 'delete time',
+    `id`            INT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'primary key',
+    `ip_address`    INT          NOT NULL DEFAULT 0 COMMENT 'ip_address',
+    `nickname`      VARCHAR(128) NOT NULL DEFAULT '' COMMENT 'user note',
+    `description`   VARCHAR(256) NOT NULL DEFAULT '' COMMENT 'user description',
+    `creator_email` VARCHAR(64)  NOT NULL DEFAULT '' COMMENT 'creator email',
+    `created_at`    TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'create time',
+    `deleted_at`    TIMESTAMP    NULL     DEFAULT NULL COMMENT 'delete time',
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 1
@@ -34,13 +34,13 @@ import (
 
 // User ENGINE=InnoDB auto_increment=1 default charset=utf8mb4 comment='user table'
 type User struct {
-	Id           uint      `gorm:"column:id;type:int;not null;autoIncrement;primaryKey;comment:'primary key'"`
-	IpAddress    int       `gorm:"column:ip_address;type:int;not null;default:0;comment:'ip_address'"`
-	Nickname     string    `gorm:"column:nickname;type:varchar(128);not null;default:'';comment:'user note'"`
-	Description  string    `gorm:"column:description;type:varchar(256);not null;default:'';comment:'user description'"`
-	CreatorEmail string    `gorm:"column:creator_email;type:varchar(64);not null;default:'';comment:'creator email'"`
-	CreatedAt    time.Time `gorm:"column:created_at;type:timestamp;not null;default:current_timestamp;comment:'create time'"`
-	DeletedAt    time.Time `gorm:"column:deleted_at;type:timestamp;default:null;comment:'delete time'"`
+	Id           uint      `gorm:"column:id;type:int;not null;autoIncrement;primaryKey;comment:primary key"`
+	IpAddress    int       `gorm:"column:ip_address;type:int;not null;default:0;comment:ip_address"`
+	Nickname     string    `gorm:"column:nickname;type:varchar(128);not null;default:'';comment:user note"`
+	Description  string    `gorm:"column:description;type:varchar(256);not null;default:'';comment:user description"`
+	CreatorEmail string    `gorm:"column:creator_email;type:varchar(64);not null;default:'';comment:creator email"`
+	CreatedAt    time.Time `gorm:"column:created_at;type:timestamp;not null;default:current_timestamp;comment:create time"`
+	DeletedAt    time.Time `gorm:"column:deleted_at;type:timestamp;default:null;comment:delete time"`
 }
 ```
 
