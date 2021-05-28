@@ -100,7 +100,7 @@ func genGoStruct(stmt *sqlparser.DDL, tableName string, pkgName string) (string,
 		}
 
 		if colType.Comment != nil {
-			builder.WriteString(fmt.Sprintf(";comment:'%s'", internal.BytesToString(colType.Comment.Val)))
+			builder.WriteString(fmt.Sprintf(";comment:%s", internal.BytesToString(colType.Comment.Val)))
 		}
 		builder.WriteString("\"`\n")
 	}
