@@ -42,9 +42,13 @@ func genGoStruct(stmt *sqlparser.DDL, tableName string, pkgName string) (string,
 	builder.WriteString(fmt.Sprintf("\n// %s%s", structName, stmt.TableSpec.Options))
 	builder.WriteString(fmt.Sprintf("\ntype %s struct { \n", structName))
 
+	var primary string
 	var indexMap = make(map[string][]*sqlparser.IndexInfo)
 	for _, index := range stmt.TableSpec.Indexes {
 		for _, column := range index.Columns {
+			if index.Info.Primary {
+				primary = column.Column.String()
+			}
 			if _, ok := indexMap[column.Column.String()]; !ok {
 				indexMap[column.Column.String()] = []*sqlparser.IndexInfo{index.Info}
 			} else {
@@ -78,7 +82,7 @@ func genGoStruct(stmt *sqlparser.DDL, tableName string, pkgName string) (string,
 		if colType.Autoincrement {
 			builder.WriteString(";autoIncrement")
 		}
-		if colType.Default != nil {
+		if colType.Default != nil && primary != colName {
 			var tmpl = ";default:%s"
 			if colType.Default.Type == sqlparser.StrVal {
 				tmpl = ";default:'%s'"
